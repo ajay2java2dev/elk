@@ -1,0 +1,27 @@
+curl -XGET 'localhost:9200/_cat/indices?v&pretty'
+
+curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
+
+curl -XPUT 'localhost:9200/courses/datastructures/1?pretty' -d'{"title":"data structures & algorithms", "credit hours": "4", "description":"Strong foundation in CS fundamentals such as data structures and algorithms is required for get
+ting jobs in companies like apple, amazon, ms, google, fb etc"}'  -H'Content-Type: application/json'
+
+curl -XPUT 'localhost:9200/courses/datastructures/2?pretty' -d'{"title":"Google Resume", "credit hours": "0", "description":"Gayle Laakman McDowell books"}'  -H'Content-Type: application/json'
+
+curl -XGET 'localhost:9200/courses/datastructures/1?pretty'
+
+curl -XGET 'localhost:9200/_mget?pretty' -d'
+{
+"docs": [
+{ "_index":"courses","_id":"1"},{"_index":"courses":"2"}
+]
+}' -H'Content-Type: application/json'
+
+curl -XGET 'localhost:9200/courses/datastructures/_mget?pretty' -d'
+{
+"docs": [
+{ "_id":"1"},{"_id":"2"}
+]
+}' -H'Content-Type: application/json'
+
+curl -XDELETE localhost:9200/courses/datastructures/1' -H'Content-Type: application/json'
+curl -XDELETE localhost:9200/courses' -H'Content-Type: application/json'
